@@ -53,12 +53,12 @@ public class ProductoBean implements GenericBean {
     private Integer existencias;
 
     @Expose(serialize = false)
-    private Integer categoria_id = 0;
+    private Integer id_categoria = 0;
     @Expose(deserialize = false)
     private CategoriaBean obj_categoria = null;
 
     @Expose(serialize = false)
-    private Integer proveedor_id = 0;
+    private Integer id_proveedor = 0;
     @Expose(deserialize = false)
     private ProveedorBean obj_proveedor = null;
 
@@ -102,11 +102,11 @@ public class ProductoBean implements GenericBean {
     }
 
     public Integer getCategoria_id() {
-        return categoria_id;
+        return id_categoria;
     }
 
-    public void setCategoria_id(Integer categoria_id) {
-        this.categoria_id = categoria_id;
+    public void setCategoria_id(Integer id_categoria) {
+        this.id_categoria = id_categoria;
     }
 
     public CategoriaBean getObj_categoria() {
@@ -118,11 +118,11 @@ public class ProductoBean implements GenericBean {
     }
 
     public Integer getProveedor_id() {
-        return proveedor_id;
+        return id_proveedor;
     }
 
-    public void setProveedor_id(Integer proveedor_id) {
-        this.proveedor_id = proveedor_id;
+    public void setProveedor_id(Integer id_proveedor) {
+        this.id_proveedor = id_proveedor;
     }
 
     public ProveedorBean getObj_proveedor() {
@@ -140,8 +140,8 @@ public class ProductoBean implements GenericBean {
         strColumns += "nombre,";
         strColumns += "precio,";
         strColumns += "existencias,";
-        strColumns += "categoria_id,";
-        strColumns += "proveedor_id";
+        strColumns += "id_categoria,";
+        strColumns += "id_proveedor";
 
         return strColumns;
     }
@@ -153,8 +153,8 @@ public class ProductoBean implements GenericBean {
         strColumns += EncodingUtilHelper.quotate(nombre) + ",";
         strColumns += precio + ",";
         strColumns += existencias + ",";
-        strColumns += categoria_id + ",";
-        strColumns += proveedor_id;
+        strColumns += id_categoria + ",";
+        strColumns += id_proveedor;
         return strColumns;
     }
 
@@ -164,9 +164,9 @@ public class ProductoBean implements GenericBean {
         strPairs += "nombre=" + EncodingUtilHelper.quotate(nombre) + ",";
         strPairs += "precio=" + precio + ",";
         strPairs += "existencias=" + existencias + ",";
-        strPairs += "categoria_id=" + categoria_id + ",";
-        strPairs += "proveedor_id=" + proveedor_id;
-        return strPairs;
+        strPairs += "id_categoria=" + id_categoria + ",";
+        strPairs += "id_proveedor=" + id_proveedor;
+            return strPairs;
     }
 
     @Override
@@ -179,20 +179,20 @@ public class ProductoBean implements GenericBean {
         if (expand > 0) {
             CategoriaBean oCategoriaBean = new CategoriaBean();
             CategoriaDao oCategoriaDao = new CategoriaDao(pooledConnection, oPempleadoBean_security, null);
-            oCategoriaBean.setId(oResultSet.getInt("categoria_id"));
+            oCategoriaBean.setId(oResultSet.getInt("id_categoria"));
             oCategoriaBean = oCategoriaDao.get(oCategoriaBean, expand - 1);
             this.setObj_categoria(oCategoriaBean);
         } else {
-            this.setCategoria_id(oResultSet.getInt("categoria_id"));
+            this.setCategoria_id(oResultSet.getInt("id_categoria"));
         }
         if (expand > 0) {
             ProveedorBean oProveedorBean = new ProveedorBean();
             ProveedorDao oProveedorDao = new ProveedorDao(pooledConnection, oPempleadoBean_security, null);
-            oProveedorBean.setId(oResultSet.getInt("proveedor_id"));
+            oProveedorBean.setId(oResultSet.getInt("id_proveedor"));
             oProveedorBean = oProveedorDao.get(oProveedorBean, expand - 1);
             this.setObj_proveedor(oProveedorBean);
         } else {
-            this.setProveedor_id(oResultSet.getInt("proveedor_id"));
+            this.setProveedor_id(oResultSet.getInt("id_proveedor"));
         }
         
         return this;

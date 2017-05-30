@@ -49,27 +49,12 @@ public class LineapedidoBean implements GenericBean {
     private Integer cantidad;
 
     @Expose(serialize = false)
-    private Integer factura_id = 0;
+    private Integer id_factura = 0;
     @Expose(deserialize = false)
     private FacturaBean obj_factura = null;
 
     @Expose(serialize = false)
-    private Integer empleado_id = 0;
-    @Expose(deserialize = false)
-    private EmpleadoBean obj_empleado = null;
-
-    @Expose(serialize = false)
-    private Integer id_tipoempleado = 0;
-    @Expose(deserialize = false)
-    private TipoempleadoBean obj_tipoempleado = null;
-
-    @Expose(serialize = false)
-    private Integer cliente_id = 0;
-    @Expose(deserialize = false)
-    private ClienteBean obj_cliente = null;
-
-    @Expose(serialize = false)
-    private Integer producto_id = 0;
+    private Integer id_producto = 0;
     @Expose(deserialize = false)
     private ProductoBean obj_producto = null;
 
@@ -97,11 +82,11 @@ public class LineapedidoBean implements GenericBean {
     }
 
     public Integer getFactura_id() {
-        return factura_id;
+        return id_factura;
     }
 
-    public void setFactura_id(Integer factura_id) {
-        this.factura_id = factura_id;
+    public void setFactura_id(Integer id_factura) {
+        this.id_factura = id_factura;
     }
 
     public FacturaBean getObj_factura() {
@@ -112,60 +97,12 @@ public class LineapedidoBean implements GenericBean {
         this.obj_factura = obj_factura;
     }
 
-    public Integer getEmpleado_id() {
-        return empleado_id;
-    }
-
-    public void setEmpleado_id(Integer empleado_id) {
-        this.empleado_id = empleado_id;
-    }
-
-    public EmpleadoBean getObj_empleado() {
-        return obj_empleado;
-    }
-
-    public void setObj_empleado(EmpleadoBean obj_empleado) {
-        this.obj_empleado = obj_empleado;
-    }
-
-    public Integer getId_tipoempleado() {
-        return id_tipoempleado;
-    }
-
-    public void setId_tipoempleado(Integer id_tipoempleado) {
-        this.id_tipoempleado = id_tipoempleado;
-    }
-
-    public TipoempleadoBean getObj_tipoempleado() {
-        return obj_tipoempleado;
-    }
-
-    public void setObj_tipoempleado(TipoempleadoBean obj_tipoempleado) {
-        this.obj_tipoempleado = obj_tipoempleado;
-    }
-
-    public Integer getCliente_id() {
-        return cliente_id;
-    }
-
-    public void setCliente_id(Integer cliente_id) {
-        this.cliente_id = cliente_id;
-    }
-
-    public ClienteBean getObj_cliente() {
-        return obj_cliente;
-    }
-
-    public void setObj_cliente(ClienteBean obj_cliente) {
-        this.obj_cliente = obj_cliente;
-    }
-
     public Integer getProducto_id() {
-        return producto_id;
+        return id_producto;
     }
 
-    public void setProducto_id(Integer producto_id) {
-        this.producto_id = producto_id;
+    public void setProducto_id(Integer id_producto) {
+        this.id_producto = id_producto;
     }
 
     public ProductoBean getObj_producto() {
@@ -176,19 +113,13 @@ public class LineapedidoBean implements GenericBean {
         this.obj_producto = obj_producto;
     }
 
-    
-    
-    
     @Override
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
         strColumns += "cantidad,";
-        strColumns += "factura_id,";
-        strColumns += "empleado_id,";
-        strColumns += "id_tipoempleado,";
-        strColumns += "producto_id,";
-        strColumns += "cliente_id";
+        strColumns += "id_factura,";
+        strColumns += "id_producto";
 
         return strColumns;
     }
@@ -198,11 +129,8 @@ public class LineapedidoBean implements GenericBean {
         String strColumns = "";
         strColumns += id + ",";
         strColumns += cantidad + ",";
-        strColumns += factura_id + ",";
-        strColumns += empleado_id + ",";
-        strColumns += id_tipoempleado + ",";
-        strColumns += producto_id + ",";
-        strColumns += cliente_id;
+        strColumns += id_factura + ",";
+        strColumns += id_producto;
         return strColumns;
     }
 
@@ -210,11 +138,8 @@ public class LineapedidoBean implements GenericBean {
     public String toPairs() {
         String strPairs = "";
         strPairs += "cantidad=" + cantidad + ",";
-        strPairs += "factura_id=" + factura_id + ",";
-        strPairs += "empleado_id=" + empleado_id + ",";
-        strPairs += "id_tipoempleado=" + id_tipoempleado + ",";
-        strPairs += "producto_id=" + producto_id + ",";
-        strPairs += "cliente_id=" + cliente_id;
+        strPairs += "id_factura=" + id_factura + ",";
+        strPairs += "id_producto=" + id_producto;
         return strPairs;
     }
 
@@ -223,51 +148,23 @@ public class LineapedidoBean implements GenericBean {
         this.setId(oResultSet.getInt("id"));
         this.setCantidad(oResultSet.getInt("cantidad"));
 
-        
         if (expand > 0) {
             FacturaBean oFacturaBean = new FacturaBean();
             FacturaDao oFacturaDao = new FacturaDao(pooledConnection, oPempleadoBean_security, null);
-            oFacturaBean.setId(oResultSet.getInt("factura_id"));
+            oFacturaBean.setId(oResultSet.getInt("id_factura"));
             oFacturaBean = oFacturaDao.get(oFacturaBean, expand - 1);
             this.setObj_factura(oFacturaBean);
         } else {
-            this.setFactura_id(oResultSet.getInt("factura_id"));
-        }
-        if (expand > 0) {
-            EmpleadoBean oEmpleadoBean = new EmpleadoBean();
-            EmpleadoDao oEmpleadoDao = new EmpleadoDao(pooledConnection, oPempleadoBean_security, null);
-            oEmpleadoBean.setId(oResultSet.getInt("empleado_id"));
-            oEmpleadoBean = oEmpleadoDao.get(oEmpleadoBean, expand - 1);
-            this.setObj_empleado(oEmpleadoBean);
-        } else {
-            this.setEmpleado_id(oResultSet.getInt("empleado_id"));
-        }
-        if (expand > 0) {
-            TipoempleadoBean oTipoempleadoBean = new TipoempleadoBean();
-            TipoempleadoDao oTipoempleadoDao = new TipoempleadoDao(pooledConnection, oPempleadoBean_security, null);
-            oTipoempleadoBean.setId(oResultSet.getInt("id_tipoempleado"));
-            oTipoempleadoBean = oTipoempleadoDao.get(oTipoempleadoBean, expand - 1);
-            this.setObj_tipoempleado(oTipoempleadoBean);
-        } else {
-            this.setId_tipoempleado(oResultSet.getInt("id_tipoempleado"));
-        }
-        if (expand > 0) {
-            ClienteBean oClienteBean = new ClienteBean();
-            ClienteDao oClienteDao = new ClienteDao(pooledConnection, oPempleadoBean_security, null);
-            oClienteBean.setId(oResultSet.getInt("cliente_id"));
-            oClienteBean = oClienteDao.get(oClienteBean, expand - 1);
-            this.setObj_cliente(oClienteBean);
-        } else {
-            this.setCliente_id(oResultSet.getInt("cliente_id"));
+            this.setFactura_id(oResultSet.getInt("id_factura"));
         }
         if (expand > 0) {
             ProductoBean oProductoBean = new ProductoBean();
             ProductoDao oProductoDao = new ProductoDao(pooledConnection, oPempleadoBean_security, null);
-            oProductoBean.setId(oResultSet.getInt("producto_id"));
+            oProductoBean.setId(oResultSet.getInt("id_producto"));
             oProductoBean = oProductoDao.get(oProductoBean, expand - 1);
             this.setObj_producto(oProductoBean);
         } else {
-            this.setProducto_id(oResultSet.getInt("producto_id"));
+            this.setProducto_id(oResultSet.getInt("id_producto"));
         }
         return this;
     }

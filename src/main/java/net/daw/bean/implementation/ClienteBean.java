@@ -145,7 +145,7 @@ public class ClienteBean implements GenericBean {
     @Override
     public String toPairs() {
         String strPairs = "";
-        strPairs += "nombre=" + EncodingUtilHelper.quotate(dni) + ",";
+        strPairs += "dni=" + EncodingUtilHelper.quotate(dni) + ",";
         strPairs += "nombre=" + EncodingUtilHelper.quotate(nombre) + ",";
         strPairs += "primerapellido=" + EncodingUtilHelper.quotate(primerapellido) + ",";
         strPairs += "segundoapellido=" + EncodingUtilHelper.quotate(segundoapellido) + ",";
@@ -157,7 +157,7 @@ public class ClienteBean implements GenericBean {
     @Override
     public ClienteBean fill(ResultSet oResultSet, Connection pooledConnection, EmpleadoBean oPempleadoBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
-        this.setNombre(oResultSet.getString("dni"));
+        this.setDni(oResultSet.getString("dni"));
         this.setNombre(oResultSet.getString("nombre"));
         this.setPrimerapellido(oResultSet.getString("primerapellido"));
         this.setSegundoapellido(oResultSet.getString("segundoapellido"));
